@@ -5,7 +5,6 @@ module.exports = withPlugins([
   [
     optimizedImages,
     {
-      /* other options */
       images: {
         mozjpeg: {
           quality: 80,
@@ -13,5 +12,4 @@ module.exports = withPlugins([
       },
     },
   ],
-  // other plugins and configuration options
 ]);
