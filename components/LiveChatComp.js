@@ -12,6 +12,7 @@ const LiveChatPage = () => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [isRecording, setIsRecording] = useState(false);
+  const [showFeatures, setShowFeatures] = useState(false);
 
   // set up Socket.io connection on component mount
   useEffect(() => {
@@ -76,12 +77,18 @@ const LiveChatPage = () => {
     });
   };
 
-  const handleSendButtonDown = () => {
+  const handleSendButtonDown = (e) => {
+    e.preventDefault();
     if (isRecording) {
       stopRecording();
     } else {
-      handleSubmit();
+      handleSubmit(e);
     }
+    setShowFeatures(true);
+  };
+
+  const handleSendButtonUp = () => {
+    setShowFeatures(false);
   };
 
   const handleSpeechRecognition = () => {
@@ -145,34 +152,39 @@ const LiveChatPage = () => {
             onChange={(e) => setMessage(e.target.value)}
           />
         )}
-        <button
-          type="button"
-          className="send-button"
-          onMouseDown={handleSendButtonDown}
-        >
-          {isRecording ? <FaMicrophone /> : <FaPaperPlane />}
-        </button>
+        <div className="send-button-container">
+          <button
+            type="button"
+            className="send-button"
+            onMouseDown={handleSendButtonDown}
+            onMouseUp={handleSendButtonUp}
+          >
+            {isRecording ? <FaMicrophone /> : <FaPaperPlane />}
+          </button>
+          {showFeatures && (
+            <div className="features">
+              <button type="button" onClick={handleSpeechRecognition}>
+                Speech-to-Text
+              </button>
+              <button type="button" onClick={generateImage}>
+                Generate Image
+              </button>
+              <button type="button" onClick={analyzeImage}>
+                Analyze Image
+              </button>
+              <button type="button" onClick={processNaturalLanguage}>
+                Process Text
+              </button>
+              <button type="button" onClick={pushNotification}>
+                Send Notification
+              </button>
+              <button type="button" onClick={getInstalledApps}>
+                Installed Apps
+              </button>
+            </div>
+          )}
+        </div>
       </form>
-      <div className="features">
-        <button type="button" onClick={handleSpeechRecognition}>
-          Speech-to-Text
-        </button>
-        <button type="button" onClick={generateImage}>
-          Generate Image
-        </button>
-        <button type="button" onClick={analyzeImage}>
-          Analyze Image
-        </button>
-        <button type="button" onClick={processNaturalLanguage}>
-          Process Text
-        </button>
-        <button type="button" onClick={pushNotification}>
-          Send Notification
-        </button>
-        <button type="button" onClick={getInstalledApps}>
-          Installed Apps
-        </button>
-      </div>
     </div>
   );
 };

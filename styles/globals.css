@@ -230,3 +230,36 @@ button[type='submit']:hover {
 .fa-paper-plane:hover {
   color: #f00;
 }
+
+/* CSS styles */
+
+.send-button-container {
+  position: relative;
+}
+
+.features {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.features button {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #333333;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.features button:hover {
+  background-color: #f2f2f2;
+}
