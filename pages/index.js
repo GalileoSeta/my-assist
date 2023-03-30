@@ -20,7 +20,7 @@ export default function Home() {
           processing, and more.
         </p>
 
-        <a href="/live-chat" class="btn">
+        <a href="/live-chat" className="btn">
           Live Chat
         </a>
 
