@@ -3,11 +3,6 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import { FaPaperPlane, FaMicrophone } from 'react-icons/fa';
 
-let ReactMic;
-if (typeof window !== 'undefined') {
-  ReactMic = require('react-mic').ReactMic;
-}
-
 const LiveChatPage = () => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -41,16 +36,19 @@ const LiveChatPage = () => {
       // If recording is in progress, stop recording and send the recorded audio file
       setIsRecording(false);
       stopRecording();
-    } else {
-      if (!message.trim()) {
-        return; // if message is empty, do nothing
-      }
-
-      const socket = io('http://localhost:3000'); // Replace with your server URL
-
-      socket.emit('chat message', { text: message }); // emit 'chat message' event with message text
-      setMessage(''); // clear input field
+      setShowFeatures(true);
+      return;
     }
+
+    if (!message.trim()) {
+      return; // if message is empty, do nothing
+    }
+
+    const socket = io('http://localhost:3000'); // Replace with your server URL
+
+    socket.emit('chat message', { text: message }); // emit 'chat message' event with message text
+    setMessage(''); // clear input field
+    setShowFeatures(true);
   };
 
   const startRecording = () => {
@@ -65,16 +63,19 @@ const LiveChatPage = () => {
     sendAudioMessage(recordedBlob);
   };
 
-  const sendAudioMessage = (audioBlob) => {
+  const sendAudioMessage = async (audioBlob) => {
     const socket = io('http://localhost:3000'); // Replace with your server URL
 
     // create FormData object to send audio file as multipart/form-data
     const formData = new FormData();
     formData.append('audio', audioBlob);
 
-    axios.post('/api/send-audio-message', formData).then((response) => {
+    try {
+      const response = await axios.post('/api/send-audio-message', formData);
       socket.emit('chat message', { audioUrl: response.data.audioUrl }); // emit 'chat message' event with audio URL
-    });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleSendButtonDown = (e) => {
@@ -84,14 +85,13 @@ const LiveChatPage = () => {
     } else {
       handleSubmit(e);
     }
-    setShowFeatures(true);
   };
 
   const handleSendButtonUp = () => {
     setShowFeatures(false);
   };
 
-  const handleSpeechRecognition = () => {
+  const handleSpeechRecognition = async () => {
     // Code for speech-to-text using Mozilla DeepSpeech
     // ...
   };
