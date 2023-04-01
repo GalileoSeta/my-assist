@@ -11,7 +11,6 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Menu />
         <h1 className={styles.title}>Welcome to my Next.js Webapp</h1>
 
         <p className={styles.description}>

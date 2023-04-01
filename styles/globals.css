@@ -2,8 +2,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:800|Lora:500&display=swap');
 
 body {
+  text-align: center;
   font-family: 'Lora', serif;
-  font-weight: 300;
+  font-weight: 200;
+  padding: 1rem;
 }
 
 h1,
@@ -13,15 +15,15 @@ h4,
 h5,
 h6 {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /* Color Styles */
 :root {
   --main-color: #f5f5f4;
   --secondary-color: #262626;
-  --accent-color: #6ebb91;
-  --highlight-color: #f6dd83;
+  --accent-color: #a8dadc;
+  --highlight-color: #ffd166;
 }
 
 body {
@@ -68,46 +70,22 @@ button:hover,
 
 /* Menu Styles */
 nav {
-  border: 1px solid rgb(170, 170, 170);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 1rem;
   background-color: var(--main-color);
-  padding: 20px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 999;
-}
-
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-nav li {
-  margin: 0 15px;
+  color: var(--secondary-color);
 }
 
 nav a {
   color: var(--secondary-color);
   text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 300;
-  transition: all 0.3s ease-in-out;
-  border-bottom: 2px solid transparent;
-  padding-bottom: 5px;
+  margin-right: 1rem;
 }
 
 nav a:hover {
-  color: var(--accent-color);
-  border-bottom-color: var(--accent-color);
+  text-decoration: underline;
 }
 
 /* Chat Component */
@@ -144,7 +122,7 @@ input[type='text'] {
   border: none;
   border-radius: 4px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
-  font-size: 1rem;
+  font-size: 0.7rem;
   margin-right: 0.5rem;
   padding: 1rem;
   width: 70%;
@@ -162,81 +140,6 @@ button[type='submit'] {
 }
 
 /* Chat Features Buttons */
-.features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 2.5rem;
-}
-
-.features button {
-  padding: 8px 16px;
-  background-color: var(--accent-color);
-  border: none;
-  border-radius: 4px;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.features button:hover {
-  background-color: var(--secondary-color);
-}
-
-form {
-  display: flex;
-  align-items: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: var(--main-color);
-  padding: 10px;
-  border: none;
-}
-
-input[type='text'] {
-  flex: 1;
-  margin-right: 10px;
-  border-radius: 5px;
-  border: none;
-  padding: 0.8rem;
-  font-size: 0.9rem;
-  margin-left: 0.5rem;
-}
-
-button[type='submit'] {
-  border: none;
-  background-color: var(--accent-color);
-  color: white;
-  padding: 0.8rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-right: 0.5rem;
-}
-
-button[type='submit']:hover {
-  background-color: var(--secondary-color);
-}
-
-/*icons control*/
-
-/* Style the FaPaperPlane icon */
-.fa-paper-plane {
-  font-size: 0.5rem;
-  color: #333;
-}
-
-/* Add hover effects */
-.fa-paper-plane:hover {
-  color: #f00;
-}
-
-/* CSS styles */
-
-.send-button-container {
-  position: relative;
-}
-
 .features {
   position: absolute;
   top: 100%;
@@ -262,4 +165,45 @@ button[type='submit']:hover {
 
 .features button:hover {
   background-color: #f2f2f2;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--main-color);
+  padding: 10px;
+  border: none;
+}
+
+input[type='text'] {
+  flex: 1;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+input[type='text']:focus {
+  outline: none;
+}
+
+button[type='submit'] {
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .live-chat-page {
+    flex-direction: row;
+    height: 80vh;
+  }
+
+  .chat-window {
+    width: 70%;
+    margin-bottom: 0;
+  }
+
+  form {
+    width: 30%;
+  }
 }

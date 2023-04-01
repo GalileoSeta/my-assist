@@ -4,20 +4,12 @@ import Link from 'next/link';
 const Menu = () => {
   return (
     <nav>
-      <ul>
-        <li>
-          <Link href="/">Home</Link>
-        </li>
-        <li>
-          <Link href="/live-chat">Chat</Link>
-        </li>
-        <li>
-          <Link href="/contact">Contact</Link>
-        </li>
-        <li>
-          <Link href="/about">About</Link>
-        </li>
-      </ul>
+      <Link href="/">
+        <span className="link-text">Home</span>
+      </Link>
+      <Link href="/live-chat">
+        <span className="link-text">Live Chat</span>
+      </Link>
     </nav>
   );
 };
